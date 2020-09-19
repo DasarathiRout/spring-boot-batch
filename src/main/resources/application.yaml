@@ -1,0 +1,4 @@
+server:
+  port : 9898
+  servlet:    context-path: /api/v2
+spring:  application:    name: Spring-Boot-OAuth-Security
