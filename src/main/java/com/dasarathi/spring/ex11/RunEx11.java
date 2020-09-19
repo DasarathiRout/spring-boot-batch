@@ -1,5 +1,6 @@
 package com.dasarathi.spring.ex11;
 
+import com.dasarathi.spring.api.vo.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -22,14 +23,12 @@ public class RunEx11 {
     @Autowired
     Job runJob;
 
-    public void run() throws Exception {
+    public void run(CustomerService currentService) {
         Map<String, String> ex11KV = new HashMap<>();
-        ex11KV.put("IDEA", "v2020.x");
-        ex11KV.put("JDK", "v1.8.x");
-        ex11KV.put("SPRING", "v5.x");
-        ex11KV.put("BOOT", "v2.3.x");
-        ex11KV.put("BATCH", "v4.2.x");
-
+        ex11KV.put("API", "v1.0");
+        ex11KV.put("BID", Integer.toString(currentService.getId()));
+        ex11KV.put("SSID", currentService.getName());
+        ex11KV.put("STATUS", Boolean.toString(currentService.isActive()));
         Map<String, JobParameter> jobParameterMap = new HashMap<>();
 
         for (Map.Entry<String, String> entry : ex11KV.entrySet()) {
@@ -37,8 +36,15 @@ public class RunEx11 {
         }
 
         jobParameterMap.put("APPLICATION", new JobParameter("SPRING.BOOT.BATCH", false));
-        
         JobParameters jobParameters = new JobParametersBuilder(new JobParameters(jobParameterMap)).toJobParameters();
-        jobLauncher.run(runJob, jobParameters);
+
+        try {
+            jobLauncher.run(runJob, jobParameters);
+        } catch (Exception e) {
+            LOG.error("RunEx11 Failed");
+        } finally {
+            ex11KV.clear();
+            jobParameterMap.clear();
+        }
     }
 }

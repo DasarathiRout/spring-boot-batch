@@ -19,13 +19,14 @@ public class MainDriverSpringBoot implements CommandLineRunner {
     @Override
     public void run(String... arrays){
         try {
-            LOG.error("http:localhost:9898/api/v1/spring/boot/actuator");
-            LOG.error("http:localhost:9898/api/v1/h2console");
+            LOG.error("http://localhost:9898/api/v1/spring/boot/actuator");
+            LOG.error("http://localhost:9898/api/v1/h2console");
+            LOG.error("http://localhost:9898/api/v1/batch/ex11/tasklet");
         } catch (Exception e) {
             LOG.error("");
         } finally {
             System.gc();
-            LOG.error(line+"    BATCH RUN ENDED    "+line);
+            LOG.error(line+line);
         }
     }
 
