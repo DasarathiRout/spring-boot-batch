@@ -1,5 +1,6 @@
 package com.dasarathi.spring.api;
 
+import com.dasarathi.spring.api.metrics.CountVisualizeRegistry;
 import com.dasarathi.spring.api.vo.CustomerService;
 import com.dasarathi.spring.ex11.RunEx11;
 import org.slf4j.Logger;
@@ -19,7 +20,8 @@ public class BatchJobController {
     private static final Logger LOG = LoggerFactory.getLogger(BatchJobController.class);
     private static final Random randomMe = new Random();
     private static final AtomicInteger counter = new AtomicInteger(10001);
-
+    @Autowired
+    CountVisualizeRegistry visualizeRegistry;
     @Autowired
     private RunEx11 ex11;
 
@@ -27,6 +29,7 @@ public class BatchJobController {
     public ResponseEntity startEx11() {
         CustomerService currentService = new CustomerService(CustomerService.createUID(), counter.incrementAndGet(), randomMe.nextBoolean());
         ex11.run(currentService);
+        visualizeRegistry.dasarathiCounter();
         return ResponseEntity.ok(currentService);
     }
 
