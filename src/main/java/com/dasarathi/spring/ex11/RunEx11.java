@@ -41,7 +41,7 @@ public class RunEx11 {
         try {
             jobLauncher.run(runJob, jobParameters);
         } catch (Exception e) {
-            LOG.error("RunEx11 Failed");
+            LOG.error("OOPS, Running Example-11 Failed.");
         } finally {
             ex11KV.clear();
             jobParameterMap.clear();

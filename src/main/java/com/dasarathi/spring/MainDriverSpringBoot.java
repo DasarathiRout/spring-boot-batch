@@ -22,8 +22,10 @@ public class MainDriverSpringBoot implements CommandLineRunner {
             LOG.error("http://localhost:9898/api/v1/spring/boot/actuator");
             LOG.error("http://localhost:9898/api/v1/h2console");
             LOG.error("http://localhost:9898/api/v1/batch/ex11/tasklet");
+            LOG.error("http://localhost:9898/api/v1/spring/boot/actuator/info");
+            LOG.error("http://localhost:9090/graph");
         } catch (Exception e) {
-            LOG.error("");
+            LOG.error(e.toString());
         } finally {
             System.gc();
             LOG.error(line+line);

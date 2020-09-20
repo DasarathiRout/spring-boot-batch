@@ -17,14 +17,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequestMapping("/batch")
 public class BatchJobController {
     private static final Logger LOG = LoggerFactory.getLogger(BatchJobController.class);
-    private static final Random randomBoolean = new Random();
+    private static final Random randomMe = new Random();
     private static final AtomicInteger counter = new AtomicInteger(10001);
+
     @Autowired
     private RunEx11 ex11;
 
     @GetMapping("/ex11/tasklet")
     public ResponseEntity startEx11() {
-        CustomerService currentService = new CustomerService(CustomerService.createUID(), counter.incrementAndGet(), randomBoolean.nextBoolean());
+        CustomerService currentService = new CustomerService(CustomerService.createUID(), counter.incrementAndGet(), randomMe.nextBoolean());
         ex11.run(currentService);
         return ResponseEntity.ok(currentService);
     }
