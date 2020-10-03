@@ -33,4 +33,9 @@ public class BatchJobController {
         return ResponseEntity.ok(currentService);
     }
 
+    @GetMapping("/ex12/csv2db")
+    public ResponseEntity startEx12() {
+        return ResponseEntity.ok("TO DO ...");
+    }
+
 }
